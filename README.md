@@ -2,65 +2,51 @@
 
 #Architecture Overview – AI Shopping Assistant
 
-The AI Shopping Assistant is designed as a safe, agentic Retrieval-Augmented Generation (RAG) system that combines external product knowledge with multi-agent reasoning and safety enforcement.
+## Project Overview
 
-🔹 High-Level Architecture
-┌──────────────────┐
-│   User Interface │
-│ (Text Query)     │
-└────────┬─────────┘
-         │
-         ▼
-┌────────────────────────┐
-│ Input Safety Validator │
-│ - Malicious detection  │
-│ - Query sanitization   │
-└────────┬───────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│ Meta System Prompt Layer   │
-│ - Agent role & constraints │
-│ - Safety rules             │
-└────────┬───────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│ Retrieval Module (RAG)     │
-│ - Product Knowledge Base   │
-│ - Vector / keyword search  │
-│ - Read-only access         │
-└────────┬───────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│ Maker Agent                │
-│ - Generates initial answer │
-│ - Uses retrieved context   │
-└────────┬───────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│ Checker Agent              │
-│ - Verifies correctness     │
-│ - Detects hallucinations   │
-│ - Enforces safety rules    │
-└────────┬───────────────────┘
-         │
-         ▼
-┌────────────────────────────┐
-│ Output Safety Filter       │
-│ - Removes unsafe claims    │
-│ - Adds disclaimers         │
-└────────┬───────────────────┘
-         │
-         ▼
-┌──────────────────┐
-│ Final Response   │
-│ (Safe & Reliable)│
-└──────────────────┘
+This project implements an Agentic Retrieval-Augmented Generation (RAG) system for an AI Shopping Assistant.
+The system answers complex shopping queries using an external product knowledge base, while ensuring safety, correctness, and reliability through a Maker–Checker agent loop and layered safety controls.
 
-🔹 Component Responsibilities
+## Objectives
+
+Retrieve relevant product information from an external knowledge base
+
+Generate grounded and explainable shopping recommendations
+
+Prevent hallucinations and unsafe outputs
+
+Enforce safety through input validation and output sanitization
+
+Demonstrate agentic reasoning using a Maker–Checker loop
+
+###== Architecture Overview ==
+
+The AI Shopping Assistant follows a multi-layered agentic architecture designed for safety and reliability.
+
+User Query
+   │
+   ▼
+Input Safety Validator
+   │
+   ▼
+Meta System Prompt Layer
+   │
+   ▼
+Retrieval Module (RAG)
+   │
+   ▼
+Maker Agent
+   │
+   ▼
+Checker Agent
+   │
+   ▼
+Output Safety Filter
+   │
+   ▼
+Final Response
+
+🧩 Component Responsibilities
 1️⃣ User Interface
 
 Accepts natural-language shopping queries
@@ -69,19 +55,19 @@ No direct access to internal tools or databases
 
 2️⃣ Input Safety Validator
 
-Blocks malicious or malformed queries
+Detects malicious or malformed queries
 
-Prevents unsafe tool invocation
+Blocks unsafe or out-of-scope requests
 
-Enforces allowed-domain usage (shopping only)
+Prevents unsafe tool usage
 
 3️⃣ Meta System Prompt Layer
 
-Defines agent identity and behavior
+Defines agent role, goals, and constraints
 
-Sets strict constraints against hallucination
+Enforces grounding and non-hallucination
 
-Ensures the assistant remains an advisor, not a decision-maker
+Restricts advice to safe shopping recommendations
 
 4️⃣ Retrieval Module (RAG Core)
 
@@ -89,8 +75,102 @@ Retrieves relevant product data from:
 
 Structured product database
 
-(Optional) Vector embeddings
-
-Guarantees grounded generation
+(Optional) vector-based similarity search
 
 Operates in read-only mode
+
+Provides grounding context for generation
+
+5️⃣ Maker Agent
+
+Generates the initial response
+
+Uses only retrieved product information
+
+Explains reasoning and trade-offs clearly
+
+6️⃣ Checker Agent
+
+Reviews the Maker’s output for:
+
+Factual correctness
+
+Completeness
+
+Safety compliance
+
+Refines or rejects unsafe or unverified responses
+
+7️⃣ Output Safety Filter
+
+Sanitizes exaggerated or misleading claims
+
+Adds disclaimers where uncertainty exists
+
+Ensures safe and responsible final output
+
+🔁 Agentic Workflow (Maker–Checker Loop)
+
+User submits a query
+
+Query is validated for safety
+
+Relevant products are retrieved
+
+Maker Agent generates an initial answer
+
+Checker Agent verifies and refines the answer
+
+Output is sanitized and returned to the user
+
+🔐 Safety Mechanisms
+
+Input validation for malicious queries
+
+Read-only retrieval tools
+
+Hallucination prevention via Checker Agent
+
+Output sanitization and disclaimers
+
+🧪 Example Query
+Find a safe Android phone under $300 with good battery life.
+
+Example Output
+Here are suitable options based on your needs:
+- Samsung Galaxy A14 ($220), Battery: 5000mAh
+- Xiaomi Redmi Note 12 ($280), Battery: 5000mAh
+
+Note: Prices may vary by seller and location.
+
+## Deliverables
+
+✔ Source code (Python / Colab notebook)
+
+✔ Agentic RAG implementation
+
+✔ Meta system prompt
+
+✔ Maker–Checker loop
+
+✔ Safety mechanisms
+
+✔ Architecture documentation
+
+✔ Example queries and outputs
+
+## Future Extensions
+
+LangChain / LangGraph orchestration
+
+Vector database integration (FAISS, Chroma)
+
+Real e-commerce API integration
+
+User preference memory
+
+Automated evaluation metrics
+
+## Final Summary
+
+This AI Shopping Assistant demonstrates a safe, agentic RAG architecture that combines retrieval-grounded reasoning, multi-agent validation, and layered safety controls to deliver trustworthy and explainable shopping recommendations.
