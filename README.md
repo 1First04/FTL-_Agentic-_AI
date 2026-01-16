@@ -1,13 +1,13 @@
 ## Assignmet 3: Agentic RAG with Safety Measures
 
-#Architecture Overview – AI Shopping Assistant
+### Architecture Overview – AI Shopping Assistant
 
-## Project Overview
+### Project Overview
 
 This project implements an Agentic Retrieval-Augmented Generation (RAG) system for an AI Shopping Assistant.
 The system answers complex shopping queries using an external product knowledge base, while ensuring safety, correctness, and reliability through a Maker–Checker agent loop and layered safety controls.
 
-## Objectives
+### Objectives
 
 Retrieve relevant product information from an external knowledge base
 
@@ -19,7 +19,7 @@ Enforce safety through input validation and output sanitization
 
 Demonstrate agentic reasoning using a Maker–Checker loop
 
-###== Architecture Overview ==
+### == Architecture Overview ==
 
 The AI Shopping Assistant follows a multi-layered agentic architecture designed for safety and reliability.
 
@@ -46,7 +46,7 @@ Output Safety Filter
    ▼
 Final Response
 
-🧩 Component Responsibilities
+### Component Responsibilities
 1️⃣ User Interface
 
 Accepts natural-language shopping queries
@@ -123,7 +123,7 @@ Checker Agent verifies and refines the answer
 
 Output is sanitized and returned to the user
 
-🔐 Safety Mechanisms
+### Safety Mechanisms
 
 Input validation for malicious queries
 
@@ -133,7 +133,7 @@ Hallucination prevention via Checker Agent
 
 Output sanitization and disclaimers
 
-🧪 Example Query
+### Example Query
 Find a safe Android phone under $300 with good battery life.
 
 Example Output
@@ -143,7 +143,7 @@ Here are suitable options based on your needs:
 
 Note: Prices may vary by seller and location.
 
-## Deliverables
+### Deliverables
 
 ✔ Source code (Python / Colab notebook)
 
@@ -159,7 +159,7 @@ Note: Prices may vary by seller and location.
 
 ✔ Example queries and outputs
 
-## Future Extensions
+### Future Extensions
 
 LangChain / LangGraph orchestration
 
